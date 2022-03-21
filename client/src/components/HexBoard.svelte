@@ -1,7 +1,7 @@
 <script lang="ts">
   import HexTile from "./HexTile.svelte";
 
-  let boardSize = {length:8};
+  let boardSize = {length:10};
 </script>
 
 <section id="hex-board">
@@ -23,7 +23,4 @@
     left: calc(var(--hex-size)/2);
     margin-left: 2px
 }
-  #hex-board {
-
-  }
 </style>

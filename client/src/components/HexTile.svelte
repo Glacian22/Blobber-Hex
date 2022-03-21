@@ -1,9 +1,15 @@
 <script lang="ts">
   export let row: number;
   export let col: number;
+
+  import { gameState } from "../stores";
+
+  $: active = row === $gameState.selfLoc.x && col === $gameState.selfLoc.y;
+
+  const makeActive = () => gameState.set({...gameState, selfLoc: {x: row, y: col}})
 </script>
 
-<div class="hexagon">
+<div class={active ? "hexagon active" : "hexagon"} on:click={makeActive}>
   <span>{row} , {col}</span>
 </div>
 
@@ -22,5 +28,8 @@
     align-items: center;
     justify-content: center;
     /* transform: rotate(30deg) */
+  }
+  .active {
+    background-color: red;
   }
 </style>
