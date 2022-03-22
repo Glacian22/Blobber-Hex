@@ -1,14 +1,15 @@
 <script lang="ts">
   import HexTile from "./HexTile.svelte";
+  import { gameState } from "../stores";
 
-  let boardSize = {length:10};
+  let boardSize = {length: $gameState.boardSize};
 </script>
 
 <section id="hex-board">
   {#each boardSize as row, i}
     <div class={i % 2 === 0 ? "board-row" : "board-row odd"}>
       {#each {length: boardSize.length} as tile, j}
-        <HexTile row={i} col={j} />
+        <HexTile row={i} col={j}/>
       {/each}
     </div>
   {/each}
@@ -21,6 +22,6 @@
   .odd {
     position: relative;
     left: calc(var(--hex-size)/2);
-    margin-left: 2px
+    margin-left: var(--hex-margin)
 }
 </style>

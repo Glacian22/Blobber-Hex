@@ -6,10 +6,49 @@
 
   $: active = row === $gameState.selfLoc.x && col === $gameState.selfLoc.y;
 
-  const makeActive = () => gameState.set({...gameState, selfLoc: {x: row, y: col}})
+  let inBounds = true;
+  // TODO: turn into loop
+  if (
+    row === 0 ||
+    (row === 1 && (col <= 4 || col >= 16)) ||
+    (row === 2 && (col <= 4 || col >= 17)) ||
+    (row === 3 && (col <= 3 || col >= 17)) ||
+    (row === 4 && (col <= 3 || col >= 18)) ||
+    (row === 5 && (col <= 2 || col >= 18)) ||
+    (row === 6 && (col <= 2 || col >= 19)) ||
+    (row === 7 && (col <= 1 || col >= 19)) ||
+    (row === 8 && (col <= 1 || col >= 20)) ||
+    (row === 9 && (col <= 0 || col >= 20)) ||
+    (row === 10 && (col <= 0 || col >= 21)) ||
+    (row === 11 && (col <= 0 || col >= 20)) ||
+    (row === 12 && (col <= 1 || col >= 20)) ||
+    (row === 13 && (col <= 1 || col >= 19)) ||
+    (row === 14 && (col <= 2 || col >= 19)) ||
+    (row === 15 && (col <= 2 || col >= 18)) ||
+    (row === 16 && (col <= 3 || col >= 18)) ||
+    (row === 17 && (col <= 3 || col >= 17)) ||
+    (row === 18 && (col <= 4 || col >= 17)) ||
+    (row === 19 && (col <= 4 || col >= 16)) ||
+    row === 20
+  ) {
+    inBounds = false;
+  }
+  const makeActive = () =>
+    gameState.set({ ...$gameState, selfLoc: { x: row, y: col } });
+
+  let hexStyle = "hexagon";
+  $: if (inBounds) {
+    hexStyle += " in-bounds";
+  }
+  $: if (active) {
+    hexStyle += " active";
+    console.log(hexStyle);
+  } else {
+    hexStyle = hexStyle.replace("active", "");
+  }
 </script>
 
-<div class={active ? "hexagon active" : "hexagon"} on:click={makeActive}>
+<div class={hexStyle} on:click={makeActive}>
   <span>{row} , {col}</span>
 </div>
 
@@ -18,16 +57,16 @@
     color: white;
     background-color: grey;
     width: var(--hex-size);
-    margin: 2px;
+    margin: var(--hex-margin);
     height: calc(var(--hex-size) * 1.1547);
     display: inline-flex;
-    font-size: initial; /* we reset the font-size if we want to add some content */
+    font-size: small;
     clip-path: polygon(0% 25%, 0% 75%, 50% 100%, 100% 75%, 100% 25%, 50% 0%);
-    /* clip-path: polygon(25% 5%, 75% 5%, 100% 50%, 75% 95%, 25% 95%, 0% 50%); */
-    clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
     align-items: center;
     justify-content: center;
-    /* transform: rotate(30deg) */
+  }
+  .in-bounds {
+    background-color: rgb(107, 92, 236);
   }
   .active {
     background-color: red;

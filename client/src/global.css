@@ -1,3 +1,4 @@
 body {
-  --hex-size: 80px
+  --hex-size: 40px;
+  --hex-margin: 1px
 }

@@ -2,6 +2,7 @@ import { writable } from 'svelte/store';
 
 export const gameState = writable(
   {
-    selfLoc: {x:0, y:0}
+    selfLoc: {x:0, y:0},
+    boardSize: 21
   }
 );
