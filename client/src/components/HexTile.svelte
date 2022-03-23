@@ -61,7 +61,7 @@
     margin: var(--hex-margin);
     height: calc(var(--hex-size) * 1.1547);
     display: inline-flex;
-    font-size: 1vw;
+    font-size: calc(var(--hex-size)*.2);
     clip-path: polygon(0% 25%, 0% 75%, 50% 100%, 100% 75%, 100% 25%, 50% 0%);
     align-items: center;
     justify-content: center;

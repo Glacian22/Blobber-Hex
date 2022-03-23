@@ -17,6 +17,7 @@
 
 <style>
   #hex-board {
+    max-width: calc(var(--hex-size)*35);
     position: relative;
     right: calc(var(--hex-size) * .25)
   }
