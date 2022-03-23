@@ -8,7 +8,7 @@
 <section id="hex-board">
   {#each boardSize as row, i}
     <div class={i % 2 === 0 ? "board-row" : "board-row odd"}>
-      {#each {length: boardSize.length} as tile, j}
+      {#each {length: boardSize.length + 1} as tile, j}
         <HexTile row={i} col={j}/>
       {/each}
     </div>
@@ -16,6 +16,10 @@
 </section>
 
 <style>
+  #hex-board {
+    position: relative;
+    right: calc(var(--hex-size) * .25)
+  }
   .board-row {
     margin: 0 0 calc(calc(var(--hex-size) / 3.5) * -1) 0;
   }
@@ -25,3 +29,6 @@
     margin-left: var(--hex-margin)
 }
 </style>
+
+
+  

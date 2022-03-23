@@ -56,11 +56,12 @@
   .hexagon {
     color: white;
     background-color: grey;
+    /* border: 3px solid black; */
     width: var(--hex-size);
     margin: var(--hex-margin);
     height: calc(var(--hex-size) * 1.1547);
     display: inline-flex;
-    font-size: small;
+    font-size: 1vw;
     clip-path: polygon(0% 25%, 0% 75%, 50% 100%, 100% 75%, 100% 25%, 50% 0%);
     align-items: center;
     justify-content: center;
