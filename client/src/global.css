@@ -1,4 +1,4 @@
 body {
-  --hex-size: clamp(6px, 4vw, 48px);
+  --hex-size: clamp(6px, 4vw, 32px);
   --hex-margin: 1px
 }
