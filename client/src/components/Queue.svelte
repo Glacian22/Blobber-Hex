@@ -1,20 +1,22 @@
 <script lang="ts">
   export let execute;
-  import {flip} from "svelte/animate";
-    import {dndzone} from "svelte-dnd-action";
-    let items = [
-        {id: 1, name: "up-left"},
-        {id: 2, name: "up-right"},
-        {id: 3, name: "right"},
-        {id: 4, name: "down-left"}
-    ];
-    const flipDurationMs = 300;
-    function handleDndConsider(e) {
-        items = e.detail.items;
-    }
-    function handleDndFinalize(e) {
-        items = e.detail.items;
-    }
+  import { flip } from "svelte/animate";
+  import { dndzone } from "svelte-dnd-action";
+  let items = [
+    { id: 1, name: "up-right" },
+    { id: 3, name: "down-right" },
+    { id: 6, name: "down-left" },
+    { id: 5, name: "left" },
+    { id: 4, name: "up-left" },
+    { id: 2, name: "right" },
+  ];
+  const flipDurationMs = 300;
+  function handleDndConsider(e) {
+    items = e.detail.items;
+  }
+  function handleDndFinalize(e) {
+    items = e.detail.items;
+  }
 </script>
 
 <div id="queue">
@@ -34,6 +36,5 @@
   #queue {
     border: 1px solid black;
     height: fit-content;
-
   }
 </style>
