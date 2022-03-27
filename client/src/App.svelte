@@ -1,65 +1,97 @@
 <script lang="ts">
-  import logo from './assets/svelte.png'
-  import Counter from './lib/Counter.svelte'
+  import HexBoard from "./components/HexBoard.svelte";
+  import Queue from "./components/Queue.svelte";
+  import { gameState } from "./stores";
+  import "./global.css";
+
+  const execute = async (actions) => {
+    for (let i = 0; i < actions.length; i++) {
+      switch (actions[i].name) {
+        case "up-right":
+          gameState.set({
+            ...$gameState,
+            selfLoc: {
+              x: $gameState.selfLoc.x - 1,
+              y:
+                $gameState.selfLoc.x % 2 === 0
+                  ? $gameState.selfLoc.y
+                  : $gameState.selfLoc.y + 1,
+            },
+          });
+          break;
+        case "right":
+          gameState.set({
+            ...$gameState,
+            selfLoc: { ...$gameState.selfLoc, y: $gameState.selfLoc.y + 1 },
+          });
+          break;
+        case "down-right":
+          gameState.set({
+            ...$gameState,
+            selfLoc: {
+              x: $gameState.selfLoc.x + 1,
+              y:
+                $gameState.selfLoc.x % 2 === 0
+                  ? $gameState.selfLoc.y
+                  : $gameState.selfLoc.y + 1,
+            },
+          });
+          break;
+        case "up-left":
+          gameState.set({
+            ...$gameState,
+            selfLoc: {
+              x: $gameState.selfLoc.x - 1,
+              y:
+                $gameState.selfLoc.x % 2 === 0
+                  ? $gameState.selfLoc.y - 1
+                  : $gameState.selfLoc.y,
+            },
+          });
+          break;
+        case "left":
+          gameState.set({
+            ...$gameState,
+            selfLoc: { ...$gameState.selfLoc, y: $gameState.selfLoc.y - 1 },
+          });
+          break;
+        case "down-left":
+          gameState.set({
+            ...$gameState,
+            selfLoc: {
+              x: $gameState.selfLoc.x + 1,
+              y:
+                $gameState.selfLoc.x % 2 === 0
+                  ? $gameState.selfLoc.y - 1
+                  : $gameState.selfLoc.y,
+            },
+          });
+          break;
+        default:
+          console.log("invalid command");
+      }
+      const delay = new Promise((resolve, reject) => {
+        setTimeout(() => {
+          console.log("delay before next action");
+          resolve("ok");
+        }, 1000);
+      });
+
+      const actionResult = await delay;
+      console.log(actionResult);
+    }
+  };
 </script>
 
 <main>
-  <img src={logo} alt="Svelte Logo" />
-  <h1>Hello Typescript!</h1>
-
-  <Counter />
-
-  <p>
-    Visit <a href="https://svelte.dev">svelte.dev</a> to learn how to build Svelte
-    apps.
-  </p>
-
-  <p>
-    Check out <a href="https://github.com/sveltejs/kit#readme">SvelteKit</a> for
-    the officially supported framework, also powered by Vite!
-  </p>
+  <HexBoard />
+  <Queue {execute} />
 </main>
 
 <style>
-  :root {
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen,
-      Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-  }
-
   main {
-    text-align: center;
-    padding: 1em;
-    margin: 0 auto;
-  }
-
-  img {
-    height: 16rem;
-    width: 16rem;
-  }
-
-  h1 {
-    color: #ff3e00;
-    text-transform: uppercase;
-    font-size: 4rem;
-    font-weight: 100;
-    line-height: 1.1;
-    margin: 2rem auto;
-    max-width: 14rem;
-  }
-
-  p {
-    max-width: 14rem;
-    margin: 1rem auto;
-    line-height: 1.35;
-  }
-
-  @media (min-width: 480px) {
-    h1 {
-      max-width: none;
-    }
-
-    p {
-      max-width: none;
-    }
+    display: flex;
+    justify-content: center;
+    /* max-width: 2000px */
   }
 </style>
