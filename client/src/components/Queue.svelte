@@ -8,6 +8,8 @@
     { id: 6, name: "down-left" },
     { id: 5, name: "left" },
     { id: 4, name: "up-left" },
+    { id: 7, name: "up-right" },
+    { id: 8, name: "down-right" },
     { id: 2, name: "right" },
   ];
   const flipDurationMs = 300;
