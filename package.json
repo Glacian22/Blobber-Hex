@@ -1,7 +1,29 @@
 {
+  "name": "blobber-hex",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server/server.ts",
+  "scripts": {
+    "start": "if-env NODE_ENV=production && npm run start:prod || npm run start:dev",
+    "start:prod": "node server.ts",
+    "start:dev": "concurrently \"nodemon --ignore 'client/*'\" \"npm run client\"",
+    "client": "cd client && npm run dev",
+    "install": "cd client && npm install",
+    "build": "cd client && npm run build",
+    "heroku-postbuild": "npm run build"
+  },
+  "author": "",
+  "license": "ISC",
   "dependencies": {
+    "axios": "^0.26.1",
     "cypress": "^9.5.1",
     "express": "^4.17.3",
+    "if-env": "^1.0.4",
     "mongoose": "^6.2.9"
+  },
+  "devDependencies": {
+    "concurrently": "^7.0.0",
+    "ts-node": "^10.7.0",
+    "typescript": "^4.6.3"
   }
 }
