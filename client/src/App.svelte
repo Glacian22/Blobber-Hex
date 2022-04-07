@@ -74,7 +74,7 @@
         setTimeout(() => {
           console.log("delay before next action");
           resolve("ok");
-        }, 1000);
+        }, 100);
       });
 
       const actionResult = await delay;
