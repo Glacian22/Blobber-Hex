@@ -1,8 +1,8 @@
 const axios = require("axios");
 const router = require("express").Router();
 
-router.get("/api", (req: any, res: any) => {
-  res.json({msg: 'all good amigo'})
+router.get("/api2", (req: any, res: any) => {
+  res.json({msg: 'ummmm, what up'})
 });
 
 export default router;
