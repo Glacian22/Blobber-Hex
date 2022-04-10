@@ -1,7 +1,7 @@
 <script lang="ts">
   import HexBoard from "./components/HexBoard.svelte";
   import Queue from "./components/Queue.svelte";
-  import axios from 'axios';
+  import api from './utils/api'
   import { gameState } from "./stores";
   import "./global.css";
 
@@ -85,7 +85,7 @@
 
   const hitAPI = async () => {
     try {
-      const res = await axios.get('/api')
+      const res = await api.submitMoves('123', ['move1', 'move2'])
       console.log(res.data.msg)
     }
     catch (err){
