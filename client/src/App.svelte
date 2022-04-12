@@ -1,6 +1,7 @@
 <script lang="ts">
   import HexBoard from "./components/HexBoard.svelte";
   import Queue from "./components/Queue.svelte";
+  import api from './utils/api'
   import { gameState } from "./stores";
   import "./global.css";
 
@@ -81,11 +82,24 @@
       console.log(actionResult);
     }
   };
+
+  const hitAPI = async () => {
+    try {
+      const res = await api.submitMoves('123', ['move1', 'move2'])
+      console.log(res.data.msg)
+    }
+    catch (err){
+      console.log(err.message)
+    }
+  }
 </script>
 
 <main>
   <HexBoard />
   <Queue {execute} />
+  <button on:click={hitAPI}>
+    HIT API
+  </button>
 </main>
 
 <style>
