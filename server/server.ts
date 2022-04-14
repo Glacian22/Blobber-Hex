@@ -1,11 +1,10 @@
 const express = require("express");
-
-const mongoose = require("mongoose");
-// const routes = require("./routes/routes");
-import routes from './routes/routes';
-import gameRoutes from './routes/gameRoutes'
-// const gameRoutes = require("./routes/gameRoutes");
 const app = express();
+const http = require('http').Server(app);
+const io = require('socket.io')(http);
+
+import mongoose from 'mongoose';
+import routes from './routes/routes';
 const PORT = process.env.PORT || 3001;
 
 // Define middleware here
@@ -17,12 +16,13 @@ if (process.env.NODE_ENV === "production") {
 }
 // Add routes, both API and view
 app.use(routes);
-app.use(gameRoutes);
 
 // Connect to the Mongo DB
 // mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/reactreadinglist");
 
 // Start the API server
-app.listen(PORT, function() {
-  console.log(`🌎  ==> Server now listening on PORT ${PORT}!`);
+http.listen(PORT, () => {
+  console.log(`🌎  ==> Server and io now listening on PORT ${PORT}!`);
 });
+
+export { io };
